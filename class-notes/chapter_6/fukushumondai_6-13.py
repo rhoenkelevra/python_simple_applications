@@ -6,13 +6,13 @@ Created on Tue Jul 13 09:32:12 2021
 """
 
 # =============================================================================
-# input Enter data 10x string
-# menu 
+# get user input 10 times
+# then display a question about data display
 # 1. nyuuryokujun -> user order, with numbers in front
 # 2. shojun -> ascend order with numbers
 # 3. koujun -> descen order
 # 4. shuryo
-# check for empty 
+# ! check for empty 
 # 
 # =============================================================================
 
