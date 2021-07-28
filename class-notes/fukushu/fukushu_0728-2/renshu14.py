@@ -28,10 +28,9 @@ coin_case = CoinCase(
 while True:
     print("硬貨の種類は：　１、５、１０,１００、５００")
     koka = input("硬貨の種類は？ \n--> ")
-    qnt = input("硬貨の枚数は？ \n--> ")
-
     if koka == "q":
         break
+    qnt = input("硬貨の枚数は？ \n--> ")
 
     try:
         coin_case.add_coins(int(koka), int(qnt))
