@@ -34,9 +34,7 @@ while True:
         break
 
     try:
-        qnt = int(qnt)
-        koka = int(koka)
-        coin_case.add_coins(koka, qnt)
+        coin_case.add_coins(int(koka), int(qnt))
     except:
         print("数値で入れてください!!")
         continue
