@@ -4,12 +4,13 @@ Created on Fri Jul  9 10:08:15 2021
 
 @author: user15
 """
+import typing
 
 
 class Employee():
     # the __init__ is the function to initialize (or constructor) an instance
     # the first param (self) is mandatory, it can be another name, but better self
-    def __init__(self, f_name, l_name, dob, role):
+    def __init__(self, f_name: str, l_name: str, dob: str, role: str):
         # self.attr = attr is how we tell that those variables are going to become
         # the instance variables
         self.f_name = f_name
