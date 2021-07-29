@@ -16,16 +16,14 @@ Created on Wed Jul 28 14:05:50 2021
 '''
 
 
-
-
-import typing
 class CoinCase:
+    '''Class represents a pocket coin case with japanese coins '''
 
-    def __init__(self, coin_case: dict[int, int]):
+    def __init__(self, coin_case):
         self.coin_case = coin_case
 
-    def add_coins(self, coin_type: int, amount: int):
-        self.coin_case[coin_type] = amount
+    def add_coins(self, coin_type, amount):
+        self.coin_case[coin_type] += amount
         return self.coin_case
 
     def get_count(self):
