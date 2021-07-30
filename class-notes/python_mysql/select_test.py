@@ -18,7 +18,7 @@ conn = mydb.connect(
 cur = conn.cursor()
 
 # ＳＬＱ文の実行
-query = "select * from author"
+query = "select * from category"
 cur.execute(query)
 
 # 実行結果を取得

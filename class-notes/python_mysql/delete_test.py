@@ -19,8 +19,8 @@ conn = mydb.connect(
 cur = conn.cursor()
 
 # 更新する情報を準備
-data = ("Y0001",)
-delete = "delete from author where author_id = %s"
+data = ("S002",)
+delete = "delete from category where category_id = %s"
 
 # SQL 文の実行
 cur.execute(delete, data)
