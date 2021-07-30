@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jul 29 11:41:06 2021
+Created on Fri Jul 30 09:11:19 2021
 
 @author: user24
 """
+
 import mysql.connector as mydb
 
 conn = mydb.connect(
@@ -17,19 +18,19 @@ conn = mydb.connect(
 #　カーソルの作成
 cur = conn.cursor()
 
-# ＳＬＱ文の実行
-query = "select * from author"
-cur.execute(query)
+# 登録する情報を準備
+data = ("Y0002", "山田 太郎", "ヤマダ タロウ") # jap. space insert weird char \u3000
+insert = "insert into author values(%s, %s, %s)"
 
-# 実行結果を取得
-rows = cur.fetchall()
+# SQL 文の実行
+cur.execute(insert, data)
 
-# 実行結果の表示する
-for row in rows:
-    print(row)
 
 # 件数を取得する
 print(cur.rowcount, "件、取得しました")
+
+# 更新を確定する
+conn.commit()
 
 # カーソルとコネクションを切断
 cur.close()
