@@ -52,3 +52,130 @@ BMI 指数            | メッセージ
 1)BMI 指数計算 2)標準体重計算 3)肥満度計算 9)終了:9
 ありがとうございました。
 '''
+
+# ウェルカムメッセージを表示し、名前・身長(m)・体重(kg)を入力します。
+print("よこそ")
+name = input("名前を入れてください:  ")
+size = float(input("身長(m)を入れてください:  "))
+weight = int(input("体重(kg)を入れてください:  "))
+
+
+# BMI 指数計算
+def bmi_calc(weight, size):
+    bmi = weight / pow(size, 2)
+    return bmi
+
+
+'''
+表示するメッセージは、BMI 指数に基づいて次のように表示します。
+BMI 指数            | メッセージ
+18.5 未満           | △△さんはやせています。
+18.5 以上、25 未満   | △△さんはふつうです。
+25 以上             |△△さんはふとっています。
+'''
+def display_bmi(bmi):
+    if bmi < 18.5:
+        print(f"BMI 指数は {bmi:.2f}です。{name}さんはやせています。")
+    if bmi >= 18.5 and bmi < 25:
+        print(f"BMI 指数は {bmi:.2f}です。{name}さんはふつうです。")
+    if bmi >= 25:
+        print(f"BMI 指数は {bmi:.2f}です。{name}さんはふとっています。")
+        
+
+
+'''
+● 標準体重計算
+標準体重 = 身長(m) × 身長(m) × 22
+'''
+def ideal_weight_calc(size):
+    ideal = pow(size, 2) * 22
+    return ideal
+
+
+
+'''
+肥満度の計算式
+肥満度（%） = (実体重 － 標準体重) ÷ 標準体重 × 100
+'''
+def obesity_calc(weight, ideal):
+    obesity = (weight - ideal) / ideal * 100
+    return obesity
+
+
+
+'''
+表示するメッセージは、肥満度に基づいて次のように表示します。
+10~20%未満  |△△さんは肥満気味です。 
+20%以上     |△△さんは肥満です。
+該当なし     |△△さんは肥満ではありません。
+※△△さんの部分は入力した名前。
+'''
+def display_obesity(obesity):
+    if obesity < 10:
+        print(f"肥満度は{obesity:.2f}です。{name}さんは肥満です。")
+        
+    if obesity >= 10 and obesity < 20:
+        print(f"肥満度は{obesity:.2f}です。{name}さんは肥満気味です。")
+        
+    if obesity >= 20:
+        print(f"肥満度は{obesity:.2f}です。{name}さんは肥満です。l")
+    
+    
+    
+'''
+データを入力後、メニューが表示され、それぞれの計算結果に基づくメッセージを表示します。
+表示する時の処理
+**********メニュー**********
+1)BMI 指数計算 2)標準体重計算 3)肥満度計算 9)終了:
+'''
+while True:
+    print("**********メニュー**********")
+    
+    choice = input("1)BMI 指数計算 2)標準体重計算 3)肥満度計算 9)終了:")
+    if choice == "9":
+        print("ありがとうございました。")
+        break
+    
+    if choice == "1":
+        bmi_result = bmi_calc(weight, size)
+        display_bmi(bmi_result)
+    
+    if choice == "2":
+        ideal = ideal_weight_calc(size)
+        print(f"{name}さんの標準体重は{ideal:.2f}kgです")
+        
+    if choice == "3":
+        obesity = obesity_calc(weight, ideal)
+        display_obesity(obesity)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

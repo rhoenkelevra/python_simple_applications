@@ -1,4 +1,88 @@
 # -*- coding: utf-8 -*-
+
+
+class AddressBook:
+    contact_list = []
+    
+    def __init__ (self, name, jusho, denwa, email):
+        self.name = name
+        self.jusho = jusho
+        self.denwa = denwa
+        self.email = email
+      
+#  住所録追加 
+    @classmethod
+    def add_contact(cls, name, jusho, denwa, email):
+        # インスタンスを作る
+        c = AddressBook(name, jusho, denwa, email)
+        
+        # リストにインスタンスを入れる
+        AddressBook.contact_list.append(c)
+        return AddressBook.contact_list
+
+
+    # 住所録表示
+    @classmethod
+    def get_all_contact(cls):
+        for c in AddressBook.contact_list:
+            print(f"名前:{c.name}")
+            print(f"住所:{c.jusho}")
+            print(f"電話番号:{c.denwa}")
+            print(f"メールアドレス:{c.email}")
+            print("*" * 20)
+        
+
+    # 住所録検索
+
+    def search(keyword):
+        # 何件を見つけるのカウンター
+        count = 0
+        
+        # インスタンスにあるリストにループ
+        for c in AddressBook.contact_list:
+            # インスタンスループ
+            for k, v in c.__dict__.items(): 
+                if keyword in v:
+                    count += 1
+                    print(f"名前:{c.name}")
+                    print(f"住所:{c.jusho}")
+                    print(f"電話番号:{c.denwa}")
+                    print(f"メールアドレス:{c.email}")
+                    print("*" * 20)
+                    print(f"{count}件のデータが見つかりました。 ")
+          
+while True:
+    print("**********メニュー**********")
+    choice = input("1)住所録追加 2)住所録表示 3)住所録検索 9)終了:  ")
+    
+    # プログラム終了
+    if choice == "9":
+        print("ありがとうございました。")
+        break
+    
+    # 追加する
+    if choice == "1":
+        name = input("名前:  ")
+        jusho = input("住所:  ")
+        denwa = input("電話番号:  ")
+        email = input("メールアドレス:  ")
+        AddressBook.add_contact(name, jusho, denwa, email)
+        
+    # 全部う参照する
+    if choice == "2":
+        AddressBook.get_all_contact()   
+        
+    # KEYWORDで検索
+    if choice == "3":
+        search_item = input("検索するデータを入力してください:  ")
+        AddressBook.search(search_item)  
+        
+'''
+contact_list = [{"name": "", "address": "", "denwa": "", "meru": ""},
+                {{"name": ""}, {"address": ""}, {"denwa": ""}, {"meru": ""} }
+                ]
+'''
+
 '''
 演習9
 ■ 仕様 

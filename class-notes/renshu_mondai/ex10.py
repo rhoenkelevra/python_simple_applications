@@ -1,5 +1,102 @@
 # -*- coding: utf-8 -*-
+import mysql.connector as mydb
 
+
+# =============================================================================
+#                       コネクション
+# =============================================================================
+conn = mydb.connect(
+        host = "localhost",
+        port = "3306",
+        user = "rhoen",
+        password = "pass",
+        database = "schedule"
+    )
+cur = conn.cursor(buffered=True)
+print(conn.is_connected())
+# =============================================================================
+#                                     クラス
+# =============================================================================
+class Schedule():
+    
+    def __init__(self, desc, datetime):
+        self.desc = desc
+        self.datetime = datetime
+        
+    
+    def add_event(desc, datetime):
+        data = (desc, datetime)
+        cur.execute("insert into schedule values()", data)
+        
+    def show_events():
+        cur.execute("select * from schedule")
+    
+    def delete_event(cls, id):
+        data = (str(id),)
+        cur.execute("delete from schedule where id=%s", data)
+        rows = cur.fetchall()
+        for row in rows:
+            print(row)
+            
+        
+    @classmethod
+    def update_event(cls, id, desc, datetime):
+        for e in cls.schedule_list:
+            if id == e.id:
+                e.__dict__[id] = id
+                e.__dict__[desc] = desc
+                e.__dict__[datetime] = datetime
+                
+
+# =============================================================================
+#                                   アプリケーション
+# =============================================================================
+
+
+# open connection
+# open cursor
+
+print("スケジュール管理アプリケーションへようこそ。")
+while True:
+    print("**********メニュー**********")
+    choice = input("1)スケジュール追加 2)スケジュール修正 3)スケジュール削除 4)スケジュール表示 9)終了: \n-->")
+    
+    if choice == "9":
+        break
+    
+    # スケジュール追加 
+    if choice == "1":
+        print("スケジュールに登録するデータを入力してください。")
+        datetime = input("日付(年/月/日 時:分): ")
+        desc = input("スケジュール: ")
+        data = (desc, datetime)
+        cur.execute("insert into schedule values(1, %s, %s)", data)
+        # Schedule.add_event(desc, datetime)
+        conn.commit()
+        print("登録しました。")
+        
+    # スケジュール修正 
+    if choice == "2":
+        print("スケジュールを変更する内容を入力してください。")
+        id = input("スケジュール番号: ")
+        datetime = input("日付(年/月/日 時:分): ")
+        desc = input("スケジュール:家族でランチ")
+        Schedule.update_event(id, desc, datetime)
+        print("修正しました。 ")
+        
+    # スケジュール削除
+    if choice == "3":
+        id = input("削除するスケジュールの ID を入力してください: ")
+        Schedule.delete_event(id)
+        print("削除しました。 ")
+        
+    if choice == "4":
+        
+        Schedule.show_events()
+        
+
+cur.close()
+conn.close()
 '''
 演習10
 ■ 仕様

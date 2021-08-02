@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jul 28 14:06:22 2021
@@ -42,7 +42,7 @@ while True:
 coin_case.get_count()
 print("=" * 20)
 coin_case.get_total()
-=======
+
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jul 28 14:06:22 2021
@@ -101,4 +101,4 @@ while True:
 coin_case.get_count()
 print("=" * 20)
 coin_case.get_total()
->>>>>>> 74819e2c355b4194e7fa01491dc63ef8b5a1a986
+
