@@ -2,4 +2,5 @@ venv
 /class-notes/venv
 node_modules
 .DS_Store
-
+.vscode
+.pylint.d
