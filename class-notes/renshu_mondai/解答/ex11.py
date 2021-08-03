@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import mysql.connector as mydb
 import numpy as np
 
-onn = None
+conn = None
 cur = None
 
 #データベース接続
@@ -26,6 +26,7 @@ for row in rows:
     y_young_old.append(int(row[4])) #young_old（前期高齢者）
     y_old_old.append(int(row[5])) #old_old（後期高齢者）
  
+        
 cur.close()
 conn.close()
 

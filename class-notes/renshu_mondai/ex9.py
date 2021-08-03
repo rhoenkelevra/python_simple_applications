@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 class AddressBook:
     contact_list = []
     
@@ -18,6 +16,8 @@ class AddressBook:
         
         # リストにインスタンスを入れる
         AddressBook.contact_list.append(c)
+        print("登録しました。")
+        print()
         return AddressBook.contact_list
 
 
@@ -78,6 +78,7 @@ while True:
         AddressBook.search(search_item)  
         
 '''
+Data structure of the contact list 
 contact_list = [{"name": "", "address": "", "denwa": "", "meru": ""},
                 {{"name": ""}, {"address": ""}, {"denwa": ""}, {"meru": ""} }
                 ]
