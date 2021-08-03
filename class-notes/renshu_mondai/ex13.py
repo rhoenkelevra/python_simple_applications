@@ -1,4 +1,34 @@
 # -*- coding: utf-8 -*-
+tate_count = 0
+
+while True:
+    tate = int(input("タテ:11 "))
+    yoko = int(input("ヨコ:32 "))
+    patterns = []
+    input_cnt = 0
+    while True:
+        pat = input("模様を入力してください(空白を入力して終了) \n")
+        patterns.append(pat)
+        input_cnt += 1
+        
+        if pat == "":
+            break
+    
+    
+    for l in range(0, tate):
+    #　文字の値はyokoの変数です
+        j = 0
+        for i in range(0, yoko):
+            
+            print(patterns[j] * (yoko / input_cnt),end="")
+            j += 1
+          
+        tate_count += 1
+        print("\n")
+    
+    break
+
+
 '''
 演習13
 ■ 仕様

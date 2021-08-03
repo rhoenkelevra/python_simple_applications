@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import mysql.connector as mydb
-
-
 # =============================================================================
-#                       コネクション
+#                                    コネクション
 # =============================================================================
 conn = mydb.connect(
         host = "localhost",
@@ -13,48 +11,74 @@ conn = mydb.connect(
         database = "schedule"
     )
 cur = conn.cursor(buffered=True)
-print(conn.is_connected())
 # =============================================================================
 #                                     クラス
 # =============================================================================
 class Schedule():
     
+    # インスタンスメソッドいらないかな？
     def __init__(self, desc, datetime):
         self.desc = desc
         self.datetime = datetime
         
-    
+    # スケジュール追加
+    # この機能は、スケジュール番号、日時、スケジュール内容をデータベースに登録します。
     def add_event(desc, datetime):
+        print("スケジュールに登録するデータを入力してください。")
+        datetime = input("日付(年/月/日 時:分): ")
+        desc = input("スケジュール: ")
         data = (desc, datetime)
-        cur.execute("insert into schedule values()", data)
-        
-    def show_events():
-        cur.execute("select * from schedule")
+        cur.execute("insert into schedule (description, date) values(%s, %s)", data)
+        conn.commit()
+        print("登録しました。")
     
-    def delete_event(cls, id):
-        data = (str(id),)
-        cur.execute("delete from schedule where id=%s", data)
-        rows = cur.fetchall()
-        for row in rows:
-            print(row)
-            
-        
+    #スケジュール表示
+    # この機能は、スケジュールデータを表示します。表示は全件か、指定かを選択して表示させます
     @classmethod
-    def update_event(cls, id, desc, datetime):
-        for e in cls.schedule_list:
-            if id == e.id:
-                e.__dict__[id] = id
-                e.__dict__[desc] = desc
-                e.__dict__[datetime] = datetime
-                
-
+    def show_events(cls):
+        option = input("1)全件表示 2)指定表示： ")
+        if option == "1":
+            cur.execute("select * from schedule")
+            rows = cur.fetchall()
+        if option == "2":
+            ans = input("スケジュール ID を指定してください： ")
+            cur.execute("select * from schedule where id=%s", (ans, ))
+            rows = cur.fetchall()
+            
+        # コンソールに印刷する
+        for (id, description, date) in rows:
+            print(f"スケジュール番号：： {id}")
+            print(f"日付(年/月/日 時:分)： {date}")
+            print(f"スケジュール： {description}")
+            print("\n")
+    
+    #スケジュール削除
+    # この機能は、指定したスケジュール番号のスケジュールデータを削除します。
+    @classmethod
+    def delete_event(cls):
+        id = input("削除するスケジュールの ID を入力してください: ")
+        data = (id,)
+        cur.execute("delete from schedule where id=%s", data)
+        conn.commit()
+        print("削除しました。")
+            
+    # スケジュール修正
+    # この機能は、指定した番号のスケジュールデータを修正します。
+    @classmethod
+    def update_event(cls):
+        print("スケジュールを変更する内容を入力してください。")
+        id = input("スケジュール番号: ")
+        
+        datetime = input("日付(年/月/日 時:分): ")
+        desc = input("スケジュール: ")
+        cur.execute("update schedule set description = %s where id=%s", (desc, id))
+        cur.execute("update schedule set date = %s where id=%s", (datetime, id))
+        conn.commit()
+        print("修正しました。 ")
+        
 # =============================================================================
 #                                   アプリケーション
 # =============================================================================
-
-
-# open connection
-# open cursor
 
 print("スケジュール管理アプリケーションへようこそ。")
 while True:
@@ -62,36 +86,23 @@ while True:
     choice = input("1)スケジュール追加 2)スケジュール修正 3)スケジュール削除 4)スケジュール表示 9)終了: \n-->")
     
     if choice == "9":
+        print("ありがとうございました。")
         break
     
     # スケジュール追加 
     if choice == "1":
-        print("スケジュールに登録するデータを入力してください。")
-        datetime = input("日付(年/月/日 時:分): ")
-        desc = input("スケジュール: ")
-        data = (desc, datetime)
-        cur.execute("insert into schedule values(1, %s, %s)", data)
-        # Schedule.add_event(desc, datetime)
-        conn.commit()
-        print("登録しました。")
+        Schedule.add_event()
         
     # スケジュール修正 
     if choice == "2":
-        print("スケジュールを変更する内容を入力してください。")
-        id = input("スケジュール番号: ")
-        datetime = input("日付(年/月/日 時:分): ")
-        desc = input("スケジュール:家族でランチ")
-        Schedule.update_event(id, desc, datetime)
-        print("修正しました。 ")
+        Schedule.update_event()
+        
         
     # スケジュール削除
     if choice == "3":
-        id = input("削除するスケジュールの ID を入力してください: ")
-        Schedule.delete_event(id)
-        print("削除しました。 ")
+        Schedule.delete_event()
         
     if choice == "4":
-        
         Schedule.show_events()
         
 
