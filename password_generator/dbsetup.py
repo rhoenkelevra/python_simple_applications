@@ -11,8 +11,8 @@ from mysql.connector import errorcode
 con = mydb.connect(
     host="localhost",
     port="3306",
-    user="rhoen",
-    password="pass",
+    user="root",
+    password="rfr689022",
     database="passwords"
 )
 

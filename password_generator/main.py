@@ -4,18 +4,18 @@ Created on Wed Aug  4 14:33:35 2021
 
 @author: user24
 """
-import modules.users
-import modules.password
+from modules.users import Users
+from modules.password import Passwords
 
+import flask
 import mysql.connector as mydb
-
 
 
 # welcome
 #  menu 1) login 2) sign up
 # login screen
 # input login and pass
-# 
+#
 
 # Login Screen
 # welcome message
@@ -25,4 +25,4 @@ import mysql.connector as mydb
 
 # 3. search by login
 # after finding it:
-    # 1) back 2) edit 3) erase
+# 1) back 2) edit 3) erase

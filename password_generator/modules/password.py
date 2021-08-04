@@ -7,6 +7,7 @@ Created on Wed Aug  4 14:39:23 2021
 import mysql.connector as mydb
 from .connector import connect
 
+con = connect()
 cursor = mydb.cursor()
 conn = connect()
 print(conn)
