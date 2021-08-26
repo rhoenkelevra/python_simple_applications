@@ -15,7 +15,11 @@ conn = mydb.connect(
     database="book"
 )
 cur = conn.cursor()
-
+ijoaiofja[jigf
+        jfopaijfi[a
+            jiafj[afj
+                jioajf[
+                    
 try:
     #　登録済みを確認
     isbn = input("ＩＳＢＮ　を入れてください：　\n--> ")

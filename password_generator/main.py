@@ -4,11 +4,27 @@ Created on Wed Aug  4 14:33:35 2021
 
 @author: user24
 """
-from modules.users import Users
-from modules.password import Passwords
+# from modules.users import Users
+# from modules.password import Passwords
+from modules.connector import connect
 
-import flask
+# import flask
 import mysql.connector as mydb
+
+
+con = connect()
+cur = con.cursor()
+
+q = cur.execute("select * from books")
+rows = cur.fetchall()
+
+for row in rows:
+    print(row)
+
+
+
+cur.close()
+con.close()
 
 
 # welcome
